@@ -1,0 +1,49 @@
+{
+  "name": "mst-automerge",
+  "version": "0.0.0",
+  "description": "Two-way binding between mobx-state-tree and Automerge",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean",
+    "demo": "vite demo --open",
+    "demo:build": "vite build demo",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@automerge/automerge": "^3.0.0",
+    "@automerge/automerge-repo": "^2.0.0",
+    "mobx": "^6.0.0",
+    "mobx-state-tree": "^7.0.0"
+  },
+  "devDependencies": {
+    "@automerge/automerge": "^3.2.6",
+    "@automerge/automerge-repo": "^2.5.6",
+    "@automerge/automerge-repo-network-broadcastchannel": "^2.5.6",
+    "@automerge/automerge-repo-network-messagechannel": "^2.5.6",
+    "@automerge/automerge-repo-storage-indexeddb": "^2.5.6",
+    "@types/node": "^25.9.3",
+    "fast-check": "^4.8.0",
+    "mobx": "^6.16.1",
+    "mobx-state-tree": "^7.2.0",
+    "playwright": "^1.60.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
+  }
+}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mst-automerge demo</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      body {
+        max-width: 640px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      .status-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 0.9rem;
+        border-radius: 8px;
+        border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+        margin-bottom: 1.5rem;
+      }
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #2ecc71;
+        flex: none;
+      }
+      .offline .status-dot {
+        background: #e74c3c;
+      }
+      .status-bar .spacer {
+        flex: 1;
+      }
+      .status-bar small {
+        opacity: 0.6;
+      }
+      button {
+        font: inherit;
+        padding: 0.3rem 0.8rem;
+        border-radius: 6px;
+        border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+        background: transparent;
+        cursor: pointer;
+      }
+      button:hover {
+        background: color-mix(in srgb, currentColor 8%, transparent);
+      }
+      section {
+        margin-bottom: 1.75rem;
+      }
+      section h2 {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        opacity: 0.6;
+        margin-bottom: 0.5rem;
+      }
+      .counter-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.4rem;
+      }
+      .counter-row button {
+        font-size: 1.1rem;
+        width: 2.2rem;
+      }
+      #note {
+        width: 100%;
+        min-height: 5rem;
+        font: inherit;
+        padding: 0.6rem;
+        border-radius: 8px;
+        border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+        background: transparent;
+        resize: vertical;
+        box-sizing: border-box;
+      }
+      form#add-todo {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.6rem;
+      }
+      form#add-todo input {
+        flex: 1;
+        font: inherit;
+        padding: 0.35rem 0.6rem;
+        border-radius: 6px;
+        border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+        background: transparent;
+      }
+      ul#todos {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      ul#todos li {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.35rem 0.2rem;
+        border-bottom: 1px solid
+          color-mix(in srgb, currentColor 12%, transparent);
+      }
+      ul#todos li span {
+        flex: 1;
+      }
+      ul#todos li.done span {
+        text-decoration: line-through;
+        opacity: 0.5;
+      }
+      ul#todos li button {
+        border: none;
+        opacity: 0.4;
+        padding: 0.1rem 0.4rem;
+      }
+      ul#todos li button:hover {
+        opacity: 1;
+      }
+      .hint {
+        font-size: 0.85rem;
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>mst-automerge demo</h1>
+    <p class="hint">
+      Open this page in several tabs — they sync through a BroadcastChannel.
+      Take a tab offline, edit on both sides, then reconnect and watch the
+      changes merge (the counter adds up, text edits interleave).
+    </p>
+
+    <div class="status-bar" id="status-bar">
+      <div class="status-dot"></div>
+      <strong id="status-label">online</strong>
+      <button id="toggle-connection">disconnect</button>
+      <div class="spacer"></div>
+      <small id="doc-url"></small>
+    </div>
+
+    <section>
+      <h2>Shared counter (merges additively)</h2>
+      <div class="counter-row">
+        <button id="dec">−</button>
+        <strong id="count">0</strong>
+        <button id="inc">+</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Shared note (text CRDT — edits interleave)</h2>
+      <textarea id="note" placeholder="type here…"></textarea>
+    </section>
+
+    <section>
+      <h2>Todos (list CRDT)</h2>
+      <form id="add-todo">
+        <input id="new-todo" placeholder="add a todo…" autocomplete="off" />
+        <button type="submit">add</button>
+      </form>
+      <ul id="todos"></ul>
+    </section>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
