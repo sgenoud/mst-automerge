@@ -1,8 +1,8 @@
 {
   "name": "mst-automerge",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Two-way binding between mobx-state-tree and Automerge",
-  "private": true,
+  "private": false,
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
